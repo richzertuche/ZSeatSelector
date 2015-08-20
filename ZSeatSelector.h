@@ -26,6 +26,7 @@
 @property (nonatomic, retain) UIImage *unavailable_image;
 @property (nonatomic, retain) UIImage *disabled_image;
 @property (nonatomic, retain) UIImage *selected_image;
+@property (nonatomic) int selected_seat_limit;
 
 @property (nonatomic) float seat_price;
 @property (retain) id delegate;

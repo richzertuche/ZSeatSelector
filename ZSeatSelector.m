@@ -48,7 +48,6 @@
             initial_seat_x = 0;
             initial_seat_y += 1;
         }
-        
     }
     
     [self setContentSize:CGSizeMake(final_width*seat_width, initial_seat_y)];
@@ -60,21 +59,39 @@
 
 - (void)seatSelected:(ZSeat*)sender{
     if (!sender.selected_seat && sender.available) {
-        [sender setSelected_seat:TRUE];
-        [sender setImage:self.selected_image forState:UIControlStateNormal];
-        [selected_seats addObject:sender];
+        if (self.selected_seat_limit) {
+            [self checkSeatLimitWithSeat:sender];
+        } else {
+            [self setSeatAsSelected:sender];
+            [selected_seats addObject:sender];
+        }
     } else {
         [selected_seats removeObject:sender];
         if (sender.available && sender.disabled) {
-            [sender setImage:[UIImage imageNamed:@"D"] forState:UIControlStateNormal];
+            [self setSeatAsDisabled:sender];
         } else if (sender.available && !sender.disabled) {
-            [sender setImage:[UIImage imageNamed:@"A"] forState:UIControlStateNormal];
+            [self setSeatAsAvaiable:sender];
         }
-        sender.selected_seat = FALSE;
     }
     
     [self.delegate seatSelected:sender];
     [self.delegate getSelectedSeats:selected_seats];
+}
+
+- (void)checkSeatLimitWithSeat:(ZSeat*)sender{
+    if ([selected_seats count]<self.selected_seat_limit) {
+        [self setSeatAsSelected:sender];
+        [selected_seats addObject:sender];
+    } else {
+        ZSeat *seat_to_make_avaiable = [selected_seats objectAtIndex:0];
+        if (seat_to_make_avaiable.disabled)
+            [self setSeatAsDisabled:seat_to_make_avaiable];
+        else
+            [self setSeatAsAvaiable:seat_to_make_avaiable];
+        [selected_seats removeObjectAtIndex:0];
+        [self setSeatAsSelected:sender];
+        [selected_seats addObject:sender];
+    }
 }
 
 - (void)createSeatButtonWithPosition:(int)initial_seat_x and:(int)initial_seat_y isAvailable:(BOOL)available isDisabled:(BOOL)disabled{
@@ -85,14 +102,11 @@
                                     seat_width,
                                     seat_height)];
     if (available && disabled) {
-        [seatButton setImage:[UIImage imageNamed:@"D"] forState:UIControlStateNormal];
-        [seatButton setSelected_seat:FALSE];
+        [self setSeatAsDisabled:seatButton];
     } else if (available && !disabled) {
-        [seatButton setImage:[UIImage imageNamed:@"A"] forState:UIControlStateNormal];
-        [seatButton setSelected_seat:FALSE];
+        [self setSeatAsAvaiable:seatButton];
     } else {
-        [seatButton setImage:[UIImage imageNamed:@"U"] forState:UIControlStateNormal];
-        [seatButton setSelected_seat:TRUE];
+        [self setSeatAsUnavaiable:seatButton];
     }
     [seatButton setAvailable:available];
     [seatButton setDisabled:disabled];
@@ -109,6 +123,26 @@
     self.unavailable_image  = unavailable_image;
     self.disabled_image     = disabled_image;
     self.selected_image     = selected_image;
+}
+
+- (void)setSeatAsUnavaiable:(ZSeat*)sender{
+    [sender setImage:self.unavailable_image forState:UIControlStateNormal];
+    [sender setSelected_seat:TRUE];
+}
+
+- (void)setSeatAsAvaiable:(ZSeat*)sender{
+    [sender setImage:self.available_image forState:UIControlStateNormal];
+    [sender setSelected_seat:FALSE];
+}
+
+- (void)setSeatAsDisabled:(ZSeat*)sender{
+    [sender setImage:self.disabled_image forState:UIControlStateNormal];
+    [sender setSelected_seat:FALSE];
+}
+
+- (void)setSeatAsSelected:(ZSeat*)sender{
+    [sender setImage:self.selected_image forState:UIControlStateNormal];
+    [sender setSelected_seat:TRUE];
 }
 
 @end
