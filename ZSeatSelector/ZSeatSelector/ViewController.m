@@ -55,6 +55,7 @@
            andSelectedImage:[UIImage imageNamed:@"S"]];
     [seat2 setSeat_price:5.50];
     [seat2 setMap:map2];
+    [seat2 setSelected_seat_limit:3];
     [seat2 setDelegate:self];
     
     [self.view addSubview:seat2];

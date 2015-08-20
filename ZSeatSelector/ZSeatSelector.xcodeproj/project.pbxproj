@@ -444,6 +444,7 @@
 				0F6B57B61B6ACD0200BEFF34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0F6B57B71B6ACD0200BEFF34 /* Build configuration list for PBXNativeTarget "ZSeatSelectorTests" */ = {
 			isa = XCConfigurationList;
@@ -452,6 +453,7 @@
 				0F6B57B91B6ACD0200BEFF34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
