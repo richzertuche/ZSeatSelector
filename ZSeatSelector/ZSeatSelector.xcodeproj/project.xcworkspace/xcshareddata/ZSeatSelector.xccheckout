@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>5146FC2A-3AAA-40C3-A054-59C699292964</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ZSeatSelector</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>35BD910312A952F343A2D84EAC2F2FC8399CBFFA</key>
+		<string>https://github.com/richzertuche/ZSeatSelector.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ZSeatSelector/ZSeatSelector.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>35BD910312A952F343A2D84EAC2F2FC8399CBFFA</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/richzertuche/ZSeatSelector.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>35BD910312A952F343A2D84EAC2F2FC8399CBFFA</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>35BD910312A952F343A2D84EAC2F2FC8399CBFFA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SeatSelector</string>
+		</dict>
+	</array>
+</dict>
+</plist>
