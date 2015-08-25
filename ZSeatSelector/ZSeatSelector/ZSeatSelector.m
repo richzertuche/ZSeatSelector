@@ -50,7 +50,7 @@
         }
     }
     
-    [self setContentSize:CGSizeMake(final_width*seat_width, initial_seat_y)];
+    [self setContentSize:CGSizeMake(final_width*seat_width, initial_seat_y*seat_height)];
     CGFloat newContentOffsetX = (self.contentSize.width - self.frame.size.width) / 2;
     self.contentOffset = CGPointMake(newContentOffsetX, 0);
     selected_seats = [[NSMutableArray alloc]init];
