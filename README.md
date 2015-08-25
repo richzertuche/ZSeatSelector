@@ -2,7 +2,7 @@
 
 <h6>Objective-C & Swift / Create a Seat Map Layout</h6>
 
-![alt tag](http://oi61.tinypic.com/2hg65vl.jpg)
+![alt tag](http://i59.tinypic.com/2enawbc.png)
 
 **You need to import ZSeatSelector and ZSeat. Also add the ZSeatSelector Delegate to your Controller:**
 
