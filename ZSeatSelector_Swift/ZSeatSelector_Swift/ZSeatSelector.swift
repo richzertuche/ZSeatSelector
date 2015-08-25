@@ -63,7 +63,7 @@ class ZSeatSelector: UIScrollView {
             }
         }
         
-        self.contentSize = CGSizeMake(CGFloat(final_width) * seat_width, CGFloat(initial_seat_y))
+        self.contentSize = CGSizeMake(CGFloat(final_width) * seat_width, CGFloat(initial_seat_y) * seat_height)
         let newContentOffsetX: CGFloat = (self.contentSize.width - self.frame.size.width) / 2
         self.contentOffset = CGPointMake(newContentOffsetX, 0)
         selected_seats = NSMutableArray()
