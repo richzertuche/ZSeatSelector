@@ -14,16 +14,21 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let map:NSString =  "AAAAA_DAAAA/"
-                            "UAAAA_DAAAA/"
-                            "UUUUU_DAAAA/"
-                            "UAAAA_AAAAA/"
+        let map:String =    "AAAAA_DAAAA/" +
+                            "UAAAA_DAAAA/" +
+                            "UUUUU_DAAAA/" +
+                            "UAAAA_AAAAA/" +
                             "AAAAA_AAAAA/";
         
         let seats = ZSeatSelector()
-        seats.frame = CGRectMake(0, 0, self.view.frame.size.width, 400)
-        seats.backgroundColor = UIColor.redColor()
+        seats.frame = CGRectMake(0, 250, self.view.frame.size.width, 150)
         seats.setSeatSize(CGSize(width: 30, height: 30))
+        seats.setAvailableImage(UIImage(named: "A")!,
+            andUnavailableImage:UIImage(named: "U")!,
+            andDisabledImage:   UIImage(named: "D")!,
+            andSelectedImage:   UIImage(named: "S")!)
+        seats.setMap(map)
+        seats.selected_seat_limit = 3
         self.view.addSubview(seats)
         
     }
