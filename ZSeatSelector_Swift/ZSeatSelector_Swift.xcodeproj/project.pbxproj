@@ -105,6 +105,7 @@
 		0F6A869A1B8C08B100AADC40 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Ricardo Zertuche";
 				TargetAttributes = {
@@ -303,6 +304,7 @@
 				0F6A86B61B8C08B100AADC40 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

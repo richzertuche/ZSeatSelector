@@ -183,6 +183,6 @@ class ZSeat: UIButton {
 extension String {
     
     subscript (i: Int) -> Character {
-        return self[advance(self.startIndex, i)]
+        return self[self.startIndex.advancedBy(i)]
     }
 }
