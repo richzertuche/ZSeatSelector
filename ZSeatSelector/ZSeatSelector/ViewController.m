@@ -33,7 +33,7 @@
            andSelectedImage:[UIImage imageNamed:@"S"]];
     [seat setSeat_price:30];
     [seat setMap:map];
-    [seat setDelegate:self];
+    seat.seat_delegate = self;
     
     [self.view addSubview:seat];
     
@@ -56,7 +56,9 @@
     [seat2 setSeat_price:5.50];
     [seat2 setMap:map2];
     [seat2 setSelected_seat_limit:3];
-    [seat2 setDelegate:self];
+    seat2.minimumZoomScale = 0.5;
+    seat2.maximumZoomScale = 10.0;
+    seat2.seat_delegate = self;
     
     [self.view addSubview:seat2];
     

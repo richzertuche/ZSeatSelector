@@ -53,8 +53,8 @@ class ViewController: UIViewController, ZSeatSelectorDelegate {
         seats2.seat_price           = 5.0
         seats2.selected_seat_limit  = 5
         seats2.seatSelectorDelegate = self
-        seats2.maximum_zoom         = 5.0
-        seats2.minimum_zoom         = 1.0
+        seats2.maximumZoomScale         = 5.0
+        seats2.minimumZoomScale         = 0.5
         self.view.addSubview(seats2)
         
     }

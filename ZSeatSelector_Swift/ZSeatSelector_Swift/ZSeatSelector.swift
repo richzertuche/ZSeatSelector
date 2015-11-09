@@ -16,29 +16,23 @@ protocol ZSeatSelectorDelegate {
 class ZSeatSelector: UIScrollView, UIScrollViewDelegate {
     
     var seatSelectorDelegate: ZSeatSelectorDelegate?
-    
-    var minimum_zoom:    CGFloat = 0.5
-    var maximum_zoom:    CGFloat = 10.0
-    
     var seat_width:     CGFloat = 20.0
     var seat_height:    CGFloat = 20.0
     var selected_seats          = NSMutableArray()
     var seat_price:     Float   = 10.0
-    
     var available_image     = UIImage()
     var unavailable_image   = UIImage()
     var disabled_image      = UIImage()
     var selected_image      = UIImage()
-    
     let zoomable_view       = UIView()
-    
     var selected_seat_limit:Int = 0
+    
+    // MARK: - Init and Configuration
     
     func setSeatSize(size: CGSize){
         seat_width  = size.width
         seat_height = size.height
     }
-    
     func setMap(map: String) {
         
         var initial_seat_x: Int = 0
@@ -74,23 +68,9 @@ class ZSeatSelector: UIScrollView, UIScrollViewDelegate {
         self.contentOffset = CGPointMake(newContentOffsetX, 0)
         selected_seats = NSMutableArray()
         
-        self.minimumZoomScale = minimum_zoom
-        self.maximumZoomScale = maximum_zoom
         self.delegate = self
         self.addSubview(zoomable_view)
     }
-    
-    func scrollViewDidZoom(scrollView: UIScrollView) {
-        //print("zoom")
-    }
-    
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
-        return self.subviews[0]
-    }
-    func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView?, atScale scale: CGFloat) {
-        //print(scale)
-    }
-    
     func createSeatButtonWithPosition(initial_seat_x: Int, and initial_seat_y: Int, isAvailable available: Bool, isDisabled disabled: Bool) {
     
         let seatButton = ZSeat(frame: CGRectMake(
@@ -118,6 +98,8 @@ class ZSeatSelector: UIScrollView, UIScrollViewDelegate {
         zoomable_view.addSubview(seatButton)
     }
     
+    // MARK: - Seat Selector Methods
+    
     func seatSelected(sender: ZSeat) {
         if !sender.selected_seat && sender.available {
             if selected_seat_limit != 0 {
@@ -143,7 +125,6 @@ class ZSeatSelector: UIScrollView, UIScrollViewDelegate {
         seatSelectorDelegate?.seatSelected(sender)
         seatSelectorDelegate?.getSelectedSeats(selected_seats)
     }
-    
     func checkSeatLimitWithSeat(sender: ZSeat) {
         if selected_seats.count < selected_seat_limit {
             setSeatAsSelected(sender)
@@ -163,31 +144,41 @@ class ZSeatSelector: UIScrollView, UIScrollViewDelegate {
         }
     }
     
+    // MARK: - Seat Images & Availability
+    
     func setAvailableImage(available_image: UIImage, andUnavailableImage unavailable_image: UIImage, andDisabledImage disabled_image: UIImage, andSelectedImage selected_image: UIImage) {
         self.available_image = available_image
         self.unavailable_image = unavailable_image
         self.disabled_image = disabled_image
         self.selected_image = selected_image
     }
-    
     func setSeatAsUnavaiable(sender: ZSeat) {
         sender.setImage(unavailable_image, forState: .Normal)
         sender.selected_seat = true
     }
-    
     func setSeatAsAvaiable(sender: ZSeat) {
         sender.setImage(available_image, forState: .Normal)
         sender.selected_seat = false
     }
-    
     func setSeatAsDisabled(sender: ZSeat) {
         sender.setImage(disabled_image, forState: .Normal)
         sender.selected_seat = false
     }
-    
     func setSeatAsSelected(sender: ZSeat) {
         sender.setImage(selected_image, forState: .Normal)
         sender.selected_seat = true
+    }
+    
+    // MARK: - UIScrollViewDelegate
+    
+    func scrollViewDidZoom(scrollView: UIScrollView) {
+        //print("zoom")
+    }
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return self.subviews[0]
+    }
+    func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView?, atScale scale: CGFloat) {
+        //print(scale)
     }
 }
 
@@ -202,7 +193,6 @@ class ZSeat: UIButton {
 }
 
 extension String {
-    
     subscript (i: Int) -> Character {
         return self[self.startIndex.advancedBy(i)]
     }
