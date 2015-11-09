@@ -13,9 +13,12 @@ protocol ZSeatSelectorDelegate {
     func getSelectedSeats(seats: NSMutableArray)
 }
 
-class ZSeatSelector: UIScrollView {
+class ZSeatSelector: UIScrollView, UIScrollViewDelegate {
     
     var seatSelectorDelegate: ZSeatSelectorDelegate?
+    
+    var minimum_zoom:    CGFloat = 0.5
+    var maximum_zoom:    CGFloat = 10.0
     
     var seat_width:     CGFloat = 20.0
     var seat_height:    CGFloat = 20.0
@@ -26,6 +29,8 @@ class ZSeatSelector: UIScrollView {
     var unavailable_image   = UIImage()
     var disabled_image      = UIImage()
     var selected_image      = UIImage()
+    
+    let zoomable_view       = UIView()
     
     var selected_seat_limit:Int = 0
     
@@ -63,12 +68,28 @@ class ZSeatSelector: UIScrollView {
             }
         }
         
-        self.contentSize = CGSizeMake(CGFloat(final_width) * seat_width, CGFloat(initial_seat_y) * seat_height)
+        zoomable_view.frame = CGRect(x: 0, y: 0, width: CGFloat(final_width) * seat_width, height: CGFloat(initial_seat_y) * seat_height)
+        self.contentSize = zoomable_view.frame.size
         let newContentOffsetX: CGFloat = (self.contentSize.width - self.frame.size.width) / 2
         self.contentOffset = CGPointMake(newContentOffsetX, 0)
         selected_seats = NSMutableArray()
+        
+        self.minimumZoomScale = minimum_zoom
+        self.maximumZoomScale = maximum_zoom
+        self.delegate = self
+        self.addSubview(zoomable_view)
     }
     
+    func scrollViewDidZoom(scrollView: UIScrollView) {
+        //print("zoom")
+    }
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return self.subviews[0]
+    }
+    func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView?, atScale scale: CGFloat) {
+        //print(scale)
+    }
     
     func createSeatButtonWithPosition(initial_seat_x: Int, and initial_seat_y: Int, isAvailable available: Bool, isDisabled disabled: Bool) {
     
@@ -94,7 +115,7 @@ class ZSeatSelector: UIScrollView {
         seatButton.column = initial_seat_x + 1
         seatButton.price = seat_price
         seatButton.addTarget(self, action: "seatSelected:", forControlEvents: .TouchDown)
-        self.addSubview(seatButton)
+        zoomable_view.addSubview(seatButton)
     }
     
     func seatSelected(sender: ZSeat) {
