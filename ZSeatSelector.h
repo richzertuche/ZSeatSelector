@@ -16,10 +16,11 @@
 - (void)getSelectedSeats:(NSMutableArray *)seats;
 @end
 
-@interface ZSeatSelector : UIScrollView{
+@interface ZSeatSelector : UIScrollView <UIScrollViewDelegate>{
     float seat_width;
     float seat_height;
     NSMutableArray *selected_seats;
+    UIView *zoomable_view;
 }
 
 @property (nonatomic, retain) UIImage *available_image;
@@ -29,7 +30,7 @@
 @property (nonatomic) int selected_seat_limit;
 
 @property (nonatomic) float seat_price;
-@property (retain) id delegate;
+@property (retain) id seat_delegate;
 
 -(void)setSeatSize:(CGSize)size;
 -(void)setMap:(NSString*)map;

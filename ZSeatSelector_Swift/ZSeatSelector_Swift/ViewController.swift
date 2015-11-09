@@ -50,9 +50,11 @@ class ViewController: UIViewController, ZSeatSelectorDelegate {
             andDisabledImage:       UIImage(named: "D")!,
             andSelectedImage:       UIImage(named: "S")!)
         seats2.setMap(map2)
-        seats2.seat_price = 5.0
-        seats2.selected_seat_limit = 5
+        seats2.seat_price           = 5.0
+        seats2.selected_seat_limit  = 5
         seats2.seatSelectorDelegate = self
+        seats2.maximumZoomScale         = 5.0
+        seats2.minimumZoomScale         = 0.5
         self.view.addSubview(seats2)
         
     }

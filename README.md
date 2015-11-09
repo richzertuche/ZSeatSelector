@@ -139,6 +139,12 @@ func getSelectedSeats(seats: NSMutableArray) {
         print("----- \(total) -----\n")
     }
 ```
+**Zooming**
+<br>
+Set the zoom as you would with a UIScrollView properties:
+minimumZoomScale<br>
+maximimZoomScale<br>
+
 
 Hope you find it useful.
 <br>
