@@ -21,17 +21,18 @@ class ViewController: UIViewController, ZSeatSelectorDelegate {
                             "AAAAA_AAAAA/";
         
         let seats = ZSeatSelector()
-        seats.frame = CGRectMake(0, 50, self.view.frame.size.width, 150)
-        seats.setSeatSize(CGSize(width: 30, height: 30))
+        seats.frame = CGRect(x: 0, y: 50, width: self.view.frame.size.width, height: 150)
+        seats.setSeatSize(CGSize(width: 10, height: 10))
         seats.setAvailableImage(UIImage(named: "A")!,
             andUnavailableImage:UIImage(named: "U")!,
             andDisabledImage:   UIImage(named: "D")!,
             andSelectedImage:   UIImage(named: "S")!)
+        seats.layout_type = "Normal"
         seats.setMap(map)
         seats.seat_price = 10.0
         seats.selected_seat_limit = 3
         seats.seatSelectorDelegate = self
-        self.view.addSubview(seats)
+        //self.view.addSubview(seats)
         
         let map2:String =   "_DDDDDD_DDDDDD_DDDDDDDD_/" +
                             "_AAAAAA_AAAAAA_DUUUAAAA_/" +
@@ -43,30 +44,32 @@ class ViewController: UIViewController, ZSeatSelectorDelegate {
                             "_AAAAAUUUAUAUAUAUUUAAAAA/"
         
         let seats2 = ZSeatSelector()
-        seats2.frame = CGRectMake(0, 250, self.view.frame.size.width, 200)
+        seats2.frame = CGRect(x: 0, y: 250, width: self.view.frame.size.width, height: 600)
         seats2.setSeatSize(CGSize(width: 30, height: 30))
         seats2.setAvailableImage(   UIImage(named: "A")!,
             andUnavailableImage:    UIImage(named: "U")!,
             andDisabledImage:       UIImage(named: "D")!,
             andSelectedImage:       UIImage(named: "S")!)
+        seats2.layout_type = "Normal"
         seats2.setMap(map2)
         seats2.seat_price           = 5.0
         seats2.selected_seat_limit  = 5
         seats2.seatSelectorDelegate = self
         seats2.maximumZoomScale         = 5.0
-        seats2.minimumZoomScale         = 0.5
+        seats2.minimumZoomScale         = 0.05
         self.view.addSubview(seats2)
+        
         
     }
     
-    func seatSelected(seat: ZSeat) {
+    func seatSelected(_ seat: ZSeat) {
         //print("Seat at row: \(seat.row) and column: \(seat.column)\n")
     }
     
-    func getSelectedSeats(seats: NSMutableArray) {
+    func getSelectedSeats(_ seats: NSMutableArray) {
         var total:Float = 0.0;
         for i in 0..<seats.count {
-            let seat:ZSeat  = seats.objectAtIndex(i) as! ZSeat
+            let seat:ZSeat  = seats.object(at: i) as! ZSeat
             print("Seat at row: \(seat.row) and column: \(seat.column)\n")
             total += seat.price
         }
